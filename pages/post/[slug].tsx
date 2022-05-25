@@ -6,6 +6,7 @@ import { sanityClient, urlFor } from '../../sanity'
 import { Post } from '../../typing'
 import PortableText from 'react-portable-text'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import Script from 'next/script'
 
 interface Props {
   post: Post
@@ -46,6 +47,14 @@ function Post({ post }: Props) {
       <Head>
         <title>{post.title}</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta
+          property="og:url"
+          content={'https://techporium.vercel.app/post/' + post.slug}
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={post.description} />
+        <meta property="og:image" content={urlFor(post.mainImage).url()!} />
       </Head>
       <Header />
 
@@ -100,6 +109,15 @@ function Post({ post }: Props) {
           ></PortableText>
         </div>
       </article>
+
+      <div className="mx-auto max-w-3xl p-5 text-center">
+        {/* Your share button code */}
+        <div
+          className="fb-share-button"
+          data-href={'https://techporium.vercel.app/post/' + post.slug}
+          data-layout="button_count"
+        ></div>
+      </div>
 
       <hr className="my-5 mx-auto max-w-lg border-yellow-500" />
 
@@ -202,6 +220,23 @@ function Post({ post }: Props) {
           </div>
         ))}
       </div>
+
+      {/* Load Facebook SDK for JavaScript */}
+      <div id="fb-root"></div>
+      <Script
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+          (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+            fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+          `,
+        }}
+      />
     </main>
   )
 }
