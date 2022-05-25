@@ -42,7 +42,7 @@ function Post({ post }: Props) {
       })
   }
 
-  const currentURL = () => `https://techporium.vercel.app/post/${post.slug}`
+  const currentURL = () => `https://techporium.vercel.app/post/` + post.slug.current
 
   return (
     <main>
