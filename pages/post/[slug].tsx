@@ -42,15 +42,14 @@ function Post({ post }: Props) {
       })
   }
 
+  const currentURL = () => `https://techporium.vercel.app/post/${post.slug}`
+
   return (
     <main>
       <Head>
         <title>{post.title}</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta
-          property="og:url"
-          content={'https://techporium.vercel.app/post/' + post.slug}
-        />
+        <meta property="og:url" content={currentURL()} />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.description} />
@@ -114,7 +113,7 @@ function Post({ post }: Props) {
         {/* Your share button code */}
         <div
           className="fb-share-button"
-          data-href={'https://techporium.vercel.app/post/' + post.slug}
+          data-href={currentURL()}
           data-layout="button_count"
         ></div>
       </div>
