@@ -223,7 +223,7 @@ function Post({ post }: Props) {
 
       {/* Load Facebook SDK for JavaScript */}
       <div id="fb-root"></div>
-      <Script strategy="afterInteractive">
+      <Script>
         {`
           (function(d, s, id) {
           var js, fjs = d.getElementsByTagName(s)[0];
