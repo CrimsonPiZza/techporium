@@ -14,9 +14,6 @@ function Header() {
         </Link>
         <div className="hidden items-center space-x-5 md:inline-flex ">
           <h3>
-            <a href="/about">About</a>
-          </h3>
-          <h3>
             <a href="/contact">Contact</a>
           </h3>
           <h3 className="rounded-full bg-green-600 px-4 py-1 text-white">
