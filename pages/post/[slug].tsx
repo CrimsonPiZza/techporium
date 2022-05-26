@@ -42,7 +42,8 @@ function Post({ post }: Props) {
       })
   }
 
-  const currentURL = () => `https://techporium.vercel.app/post/` + post.slug.current
+  const currentURL = () =>
+    `https://techporium.vercel.app/post/` + post.slug.current
 
   return (
     <main>
@@ -64,11 +65,11 @@ function Post({ post }: Props) {
       />
 
       <article className="mx-auto max-w-3xl p-5">
-        <h1 className="ml-10 mb-3 text-3xl">{post.title}</h1>
+        <h1 className="mb-3 text-3xl">{post.title}</h1>
         <h2 className="text-l mb-2 font-light text-gray-500">
           {post.description}
         </h2>
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 p-2">
           <img
             className="h-10 w-10 rounded-full"
             src={urlFor(post.author.image).url()!}
@@ -82,7 +83,7 @@ function Post({ post }: Props) {
 
         <div>
           <PortableText
-            className="mt-10"
+            className="post__content mt-10"
             dataset={process.env.NEXT_PUBLIC_SANITY_DATASET}
             projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}
             content={post.body}
@@ -123,7 +124,7 @@ function Post({ post }: Props) {
       {submitted ? (
         <div className="my-10 mx-auto flex max-w-2xl flex-col bg-yellow-500 p-10 text-white">
           <h1 className="text-3xl font-bold">
-            Thank you for submmiting the comment!
+            Thank you for submitting the comment!
           </h1>
           <p>Once it has been approve, your comment will appear below!</p>
         </div>
@@ -222,20 +223,17 @@ function Post({ post }: Props) {
 
       {/* Load Facebook SDK for JavaScript */}
       <div id="fb-root"></div>
-      <Script
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
+      <Script strategy="afterInteractive">
+        {`
           (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
-            fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-          `,
-        }}
-      />
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+          fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));
+        `}
+      </Script>
     </main>
   )
 }

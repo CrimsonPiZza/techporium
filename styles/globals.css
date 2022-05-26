@@ -5,3 +5,9 @@
 body {
   background-color: #FAFAFA;
 }
+
+
+.post__content figure img {
+  margin: auto;
+  padding: 10px;
+}
